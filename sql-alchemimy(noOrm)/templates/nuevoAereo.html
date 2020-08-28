@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block titulo %}
+        Nuevo aeropuerto
+{% endblock %}
+
+{% block body %}
+	<h1>Nuevo Aeropuerto</h1>
+	<form action="{{ url_for('nuevoAeropuerto2') }}" method="POST">
+        <div class="form-group">
+			<input class="form-control" name="codigo" placeholder="Código aereopuerto">
+		</div>
+        <div class="form-group">
+			<input class="form-control" name="nombre" placeholder="Nombre aeropuerto">
+		</div>
+        <div class="form-group">
+            <button class="btn btn-primary"> Nuevo aeropuerto</button>
+        </div>
+    </form>
+{% endblock %}

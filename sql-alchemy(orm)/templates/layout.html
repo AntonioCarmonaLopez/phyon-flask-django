@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>{% block titulo %}{%endblock%}</title> 
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="shortcut icon" href="{{ url_for('static', filename='imgs/favicon.ico') }}">
+		<link rel="stylesheet" href={{ url_for('static', filename='css/style.css') }}>
+		<script type="text/javascript" src="{{ url_for('static', filename='js/myjs.js') }}"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+			  <div class="navbar-header">
+				<a class="navbar-brand" href="/">Menu vuelos</a>
+			  </div>
+			  <ul class="nav navbar-nav">
+				<li class="active"><a href="/">Inicio</a></li>
+				<li><a href="/vuelos">Vuelos</a></li>
+				<li><a href="/nuevoVuelo">Nuevo Vuelo</a></li>
+				<li><a href="/nuevoAeropuerto">Nuevo Aeropuerto</a></li>
+				<li><a href="/registrar">Logup</a></li>
+				<li><a href="/login">Login</a></li>
+				<li><a href="/logout">Logout</a></li>
+			  </ul>
+			</div>
+		  </nav>
+		<div class="container">
+			{% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+			<ul>
+				{% for category, message in messages %}
+				  <li class="{{ category }}">{{ message }}</li>
+				{% endfor %}
+				</ul>
+            {% endif %}
+            {% endwith %}
+			{% block body %}
+			{% endblock %}
+		</div>
+	</body>
+</html>

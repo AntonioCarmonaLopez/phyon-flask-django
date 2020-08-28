@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Articulos</title>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/requests.js') }}"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <script>
+
+            document.addEventListener('DOMContentLoaded', () => {
+                // pagina defecto
+                load_page('1');
+                
+                // capturar enlaces al hacer click sobre ellos
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.onclick = () => {
+                        load_page(link.dataset.page);
+                       
+                        return false;
+                    };
+                });
+            });
+
+             // botón atrás recupero enlace anterior de la pila de estados
+             window.onpopstate = e => {
+                const data = e.state;
+                document.title = data.title;
+                document.querySelector('#body').innerHTML = data.text;
+            };
+
+
+            window.onscroll = () => {
+                let tamBody = document.body.offsetHeight;
+            console.log('----');
+            console.log(window.innerHeight);
+            console.log(window.scrollY);
+            console.log(tamBody);
+            
+            if (window.innerHeight + window.scrollY >= tamBody) {
+                if(document.getElementById('fin')){
+                    document.getElementById("fin").setAttribute("display", "none");
+                    document.getElementById('body').style.background = 'white';
+                } else {
+                const p = document.createElement('p');
+                p.setAttribute('id', 'fin');
+                p.innerHTML = "FIN ARTICULO";
+                document.getElementById('body').append(p); 
+                document.getElementById('body').style.background = 'green';
+                } 
+            } 
+        };
+
+  
+        </script>
+        <script></script>
+    </head>
+    <body>
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+			  <div class="navbar-header">
+				<a class="navbar-brand" href=""></a>Articulos</a>
+			  </div>
+			  <ul class="nav navbar-nav">
+				{%for articulo in articulos %}
+                	<li class="list-group-item"><a href="" class="nav-link" data-page="{{articulo.id}}">{{articulo.titulo}}</a></li>
+            	{%endfor%}
+			  </ul>
+			</div>
+		  </nav>
+        <hr>
+        <div id="body">
+
+    </body>
+</html>

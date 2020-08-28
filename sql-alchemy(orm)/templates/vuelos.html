@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block titulo %}
+        Vuelos
+{% endblock %}  
+{% block body %}
+    <h1>Lista de vuelos</h1>
+    <ul class="list-group">
+        {% for vuelo in vuelos %}
+        <li class="list-group-item">
+            <a href="{{ url_for('vuelo', id_vuelo=vuelo.id) }}")>
+            {{ vuelo.origen }} a {{ vuelo.destino }}
+            </a>
+            {% if not vuelo.pasajeros %}
+                <button type="button" id="btnBorrar" class="btn btn-danger" onclick="borrar('{{vuelo.id}}')">Borrar</button>
+            {% else %}
+                <button type="button" id="btnBorrar" class="btn btn-danger" disabled>Borrar</button>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

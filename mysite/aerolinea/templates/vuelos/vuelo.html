@@ -1,0 +1,32 @@
+{% extends "vuelos/base.html" %}
+{% block tittle %}Vuelo {{ vuelo.id }}{%endblock %}
+{% block body %}
+    <h1>Vuelo {{ vuelo.id}}</h1>
+    <ul>
+        <li>{{vuelo.origen}} a {{vuelo.destino}} Duración: {{vuelo.duracion}} Minutos</li>
+    </ul>
+    <h2>Pasajeros</h2>
+    <ul>
+        {% for pasajero in pasajeros %}
+            <li>{{pasajero}}</li>
+        {% empty %}
+            <li>No hay pasajeros</li>
+        {% endfor %}
+    </ul>
+    <hr>
+    <h2>Añadir pasajero</h2>
+    {% if noPasajeros %}
+        <form action=" {% url 'reserva' vuelo.id%}" method="post">
+            {% csrf_token %}
+            <select name="pasajero" id="slcPasajero">
+                {% for pasajero in noPasajeros %}
+                    <option value="{{ pasajero.id }} ">{{ pasajero }}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="reservar">
+        </form>
+    {% else %}
+        <div>Todos los pasajeros en BD, ya tienen reservado este vuelo</div>
+    {% endif %}
+    <a href="{% url 'index' %}">Lista de Vuelos</a>
+{% endblock %}

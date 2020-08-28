@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title></title>
+  </head>
+  <body onload="recuperarInfo()">
+    <div id="titulo"></div>
+    <ul id="messages"></ul>
+    <input id="myMessage" type="text">
+    <button id="send">Enviar</button>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/socket.js') }}"></script>
+  <script>
+   document.addEventListener('DOMContentLoaded', () => {
+// Connect to websocket
+var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
+    usuario = localStorage.getItem('usuario');
+    sala = localStorage.getItem('sala')
+    // Send messages
+    document.querySelector('button').onclick = () => {
+            socket.emit('incoming-msg', {'msg': document.querySelector('#myMessage').value,
+            'usuario': usuario, 'sala': sala});
+
+            
+        document.querySelector('#myMessage').value = '';
+    };
+    //se añade el voto emitido a la lista
+        socket.on('message', data => {
+            const li = document.createElement('li');
+            li.innerHTML = 'Mensaje:'+data
+            document.querySelector('#messages').append(li)
+        })
+
+});
+  </script>
+</body>
+</html>

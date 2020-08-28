@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block titulo %}
+        Login
+{% endblock %}
+
+{% block body %}
+	<h1>Login</h1>
+	<form action="{{ url_for('login') }}" method="POST">
+        <div class="form-group">
+            <label for="Nombre">Nombre Usuario</label>
+			<input class="form-control" name="nombre" id="txtNombre" placeholder="nombre">
+		</div>
+        <div class="form-group">
+            <label for="Password">Contraseña</label>
+            <input type="password" class="form-control" name="password" id="txtPassword" placeholder="Contraseña">
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary" id="btnEnviar"> Aceptar</button>
+        </div>
+    </form>
+    <script>
+        let boton = document.getElementById("btnEnviar");
+    
+        document.addEventListener("DOMContentLoaded",() => {
+            boton.addEventListener("click",validacionLogin); 
+
+        });     
+    </script>
+{% endblock %}

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="{{ url_for('static', filename='js/socket.js') }}"></script>
+
+ 
+    <title>Inicio</title>
+</head>
+<body>
+    <form action="{{ url_for('index') }}" method="POST">
+        <div class="form-group">
+            <input type="text" name="usuario" id="txtUsuario">
+        </div>
+        <div class="form-group">
+            <select name="sala" id="slcSala">
+                {% for sala in salas %}
+                    <option value="{{room}}">{{sala}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary" onclick="validarLoginChat()">Unirse</button>
+        </div>
+    </form>
+</body>
+
+</html>

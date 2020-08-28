@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block titulo %}
+        Vuelo
+{% endblock %}  
+{% block body %}
+    <h1>Detalle vuelo</h1>
+    <ul class="list-group" >
+        <li class="list-group-item" >Origen: {{vuelo.origen}}</li>
+        <li class="list-group-item">Destino: {{vuelo.destino}}</li>
+        <li class="list-group-item">Duración: {{vuelo.duracion}} minutos</li>
+    </ul>
+    <h2>Pasajeros</h2>
+    <ul class="list-group">
+        {% for pasajero in pasajeros %}
+            <li class="list-group-item">Nombre: {{ pasajero.nombre }}</li>
+        {% else %}
+            <li class="list-group-item">No existen pasajeros para este vuelo</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

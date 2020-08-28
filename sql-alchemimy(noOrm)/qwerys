@@ -1,0 +1,14 @@
+----JOIN----
+SELECT pasajeros.id,pasajeros.nombre,vuelos.id as vuelo,origen.nombre as origen,aeropuertos.codigo,aeropuertos.nombre as destino,aeropuertos.codigo FROM pasajeros 
+JOIN aeropuertos ON aeropuertos.id = pasajeros.vuelo_id
+JOIN origen ON pasajeros.origen_id = origen.id 
+JOIN vuelos ON vuelos.id = pasajeros.vuelo_id;
+----GROUP BY----
+SELECT vuelo_id FROM pasajeros GROUP BY vuelo_id HAVING count(*)>1
+	SELECT origen_id,destino_id FROM vuelos WHERE id IN
+	(SELECT vuelo_id FROM pasajeros GROUP BY vuelo_id HAVING count(*)>1);
+		SELECT v.id,o.nombre as origen,d.nombre as destino FROM vuelos as v 
+		INNER JOIN destinos as d ON d.id = v.destino_id 
+		INNER JOIN origen as o ON v.origen_id = o.id WHERE v.id IN
+   		(SELECT vuelo_id FROM pasajeros GROUP BY vuelo_id HAVING count(*)>1);
+ 		

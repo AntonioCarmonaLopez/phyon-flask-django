@@ -1,0 +1,45 @@
+{% extends "vuelos/base.html" %}
+{% block tittle %}Vuelos{%endblock %}
+{% block body %}
+{% csrf_token %}
+    <h1>Vuelos</h1>
+    {% if msg %}
+        {% if 'error' in msg %}
+            <p class="error">
+                {{ msg }}
+            </p>
+        {% else %}
+            <p class="exito">
+                {{ msg }}
+            </p>
+        {% endif %}
+    {% endif %}
+    <ul>
+        {% for vuelo in vuelos %}
+            <li>
+                <a href="{% url 'vuelo' vuelo.id %}">{{ vuelo }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+    {% if vuelos.has_other_pages %}
+  <ul class="pagination">
+    {% if vuelos.has_previous %}
+      <li><a href="?page={{ vuelos.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in vuelos.paginator.page_range %}
+      {% if vuelos.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if vuelos.has_next %}
+      <li><a href="?page={{ vuelos.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+{% endblock %}

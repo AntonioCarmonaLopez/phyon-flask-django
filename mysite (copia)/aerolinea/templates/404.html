@@ -1,0 +1,10 @@
+{% extends 'vuelos/base.html' %}
+{% block title %}404 {% endblock %}
+{% block content %}
+<div class="jumbotron">
+    <h1 class="display-4">Pagina no encontrada</h1>
+    <p class="lead">El contenido que buscas no existe</p>
+    <hr class="my-4">
+    <a class="btn btn-primary btn-lg" href="{% url 'vuelos' %}" role="button">vuelos</a>
+  </div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "vuelos/base.html" %}
+   {% block tittle %}Login{%endblock %}
+   {% block login %}
+
+    {% endblock %}
+    {% block body %}
+        <p>Para poder acceder a la plataforma debes logearte</p>
+        {% if msg %}
+            {% if 'error' in msg %}
+                <p class="error">
+                    {{ msg }}
+                </p>
+            {% else %}
+                <p class="exito">
+                    {{ msg }}
+                </p>
+            {% endif %}
+        {% endif %}
+        <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            <input type="text" name="txtUsuario" id="txtUsuario">
+            <input type="password" name="txtPass" id="txtPass">
+            <input type="submit" value="Validar">
+        </form>
+        <input type="button" value="Cancelar">
+        <a href="/registro">Registro</a>
+        <script>
+            let boton = document.getElementById("btnEnviar");
+        
+            document.addEventListener("DOMContentLoaded",() => {
+                boton.addEventListener("click",validacionLogin); 
+    
+            });     
+        </script>
+    {% endblock %}
